@@ -1,0 +1,17 @@
+<h1>Github Repositories:</h1>
+<span *ngIf="githubResponse">
+    <div>Total: {{githubResponse.data.search.repositoryCount}}</div>
+
+    <ul *ngFor="let edge of githubResponse.data.search.edges">
+        <a (click)="openDetail(edge)">
+            <div>Name: {{edge.node.name}}</div>
+            <div>Description: {{edge.node.shortDescriptionHTML}}</div>
+        </a>
+    </ul>
+</span>
+
+<!-- 
+    <ul *ngFor="let entry of githubResponseObservable | async | select: 'data.search.edges'">
+        Name: {{entry.node.name}}
+    </ul>
+-->
