@@ -1,17 +1,24 @@
 <h1>Github Repositories:</h1>
-<span *ngIf="githubResponse">
+
+<div *ngIf="loading">
+    <p>Loading...</p>
+</div>
+
+<span *ngIf="!loading">
     <div>Total: {{githubResponse.data.search.repositoryCount}}</div>
 
     <ul *ngFor="let edge of githubResponse.data.search.edges">
         <a (click)="openDetail(edge)">
-            <div>Name: {{edge.node.name}}</div>
-            <div>Description: {{edge.node.shortDescriptionHTML}}</div>
+            <h2>{{edge.node.name}}</h2>
         </a>
+        <div>{{edge.node.shortDescriptionHTML}}</div>
+        <hr>
     </ul>
 </span>
 
-<!-- 
-    <ul *ngFor="let entry of githubResponseObservable | async | select: 'data.search.edges'">
+
+<!-- select pipe not working!?:
+    <ul *ngFor="let entry of githubResponseObservable | async | select: 'search.edges'">
         Name: {{entry.node.name}}
     </ul>
 -->

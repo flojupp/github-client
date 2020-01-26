@@ -6,7 +6,7 @@ import { DetailComponent } from './components/detail/detail.component';
 
 const routes: Routes = [
   {
-    path: "**",
+    path: "",
     pathMatch: "full",
     redirectTo: "master"
   },
@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: "detail",
     component: DetailComponent
+  },
+  {
+    path: "**",
+    redirectTo: "master"
   }
 ];
 

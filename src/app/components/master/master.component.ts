@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class MasterComponent implements OnInit, OnDestroy {
   
+  loading: boolean;
   githubResponseObservable: Observable<any>;
   githubResponse: any;
   querySubscription: Subscription;
@@ -18,10 +19,11 @@ export class MasterComponent implements OnInit, OnDestroy {
   constructor(private apollo: Apollo, private router: Router) { }
 
   ngOnInit() {
+    this.loading = true;
     this.githubResponseObservable = this.apollo.watchQuery({query: masterQuery}).valueChanges;
     this.querySubscription = this.githubResponseObservable.subscribe((data) => {
-      console.log(data);
       this.githubResponse = data;
+      this.loading = false;
     });
   }
 
@@ -30,15 +32,14 @@ export class MasterComponent implements OnInit, OnDestroy {
   }
 
   public openDetail(edge: any) {
-    console.log(edge);
-    this.router.navigateByUrl('../detail');// /' + edge.node.id');
+    this.router.navigate(['detail', { owner: edge.node.owner.login, name: edge.node.name }]);
   }
 
 }
 
 const masterQuery = gql`
 {
-  search(query: "is:public", type: REPOSITORY, first: 10) {
+  search(query: "is:public", type: REPOSITORY, first: 100) {
     repositoryCount
     pageInfo {
       endCursor
@@ -53,6 +54,9 @@ const masterQuery = gql`
           createdAt
           updatedAt
           shortDescriptionHTML
+          owner {
+            login
+          }
         }
       }
     }

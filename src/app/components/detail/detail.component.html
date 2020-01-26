@@ -1,1 +1,16 @@
-<p>detail works!</p>
+<div *ngIf="loading">
+    <p>Loading...</p>
+</div>
+
+<div *ngIf="!loading">
+    <h1>{{githubResponse.data.repository.name}}</h1>
+    <h2>{{githubResponse.data.repository.description}}</h2>
+    <p>Owner: {{githubResponse.data.repository.owner.login}}</p>
+    <p>Homepage: {{githubResponse.data.repository.homepageUrl}}</p>
+    <p>Created: {{githubResponse.data.repository.createdAt}}</p>
+    <p>Updated: {{githubResponse.data.repository.updatedAt}}</p>
+    <p>Forks: {{githubResponse.data.repository.forkCount}}</p>
+    <a href="{{githubResponse.data.repository.url}}">{{githubResponse.data.repository.url}}</a>
+</div>
+<hr>
+<input type="button" (click)="openMaster()" value="Back">
