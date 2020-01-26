@@ -53,7 +53,7 @@ const masterQuery = gql`
           url
           createdAt
           updatedAt
-          shortDescriptionHTML
+          description
           owner {
             login
           }

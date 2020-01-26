@@ -8,10 +8,10 @@
     <div>Total: {{githubResponse.data.search.repositoryCount}}</div>
 
     <ul *ngFor="let edge of githubResponse.data.search.edges">
-        <a (click)="openDetail(edge)">
+        <div class="detail-link" (click)="openDetail(edge)">
             <h2>{{edge.node.name}}</h2>
-        </a>
-        <div>{{edge.node.shortDescriptionHTML}}</div>
+        </div>
+        <div>{{edge.node.description}}</div>
         <hr>
     </ul>
 </span>

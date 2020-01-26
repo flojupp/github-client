@@ -53,7 +53,6 @@ query detailQuery($owner: String!, $name: String!) {
     createdAt
     updatedAt
     description
-    shortDescriptionHTML
     homepageUrl
     owner {
       login
